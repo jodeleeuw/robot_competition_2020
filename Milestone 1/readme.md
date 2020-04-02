@@ -12,7 +12,7 @@ Once installed, I added the `ZumoShield` library to my project code through the 
 
 The Zumo library provides the function `setLeftSpeed()` and `setRightSpeed()` to control the motors. The valid range for speed is -400 to 400. I began by setting the speed to 100 for each motor, waiting for 4 seconds, and then setting the speed to 0. After setting the speed to 0 the code enters an infinite loop to pause idenfinitely.
 
-```c
+```c++
 #include <ZumoShield.h>
 
 ZumoMotors motors;
@@ -35,11 +35,11 @@ void loop() {
 }
 ```
 
-## Testing it out...
+## Testing
 
 As this video shows, 4 second of travel at a speed of 100 was not fast enough to travel 4ft. So I changed the speed to 300. This was plenty fast.
 
-<iframe width="871" height="490" src="https://www.youtube.com/embed/q5z4fuUra2Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![YouTube Video](https://img.youtube.com/vi/q5z4fuUra2Q/0.jpg)](https://www.youtube.com/embed/q5z4fuUra2Q)
 
-Milestone 1: complete!
+**Milestone 1: complete!**
 
