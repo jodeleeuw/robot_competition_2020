@@ -9,8 +9,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  motors.setLeftSpeed(100);
-  motors.setRightSpeed(100);
+  motors.setLeftSpeed(300);
+  motors.setRightSpeed(300);
   delay(4000);
   motors.setLeftSpeed(0);
   motors.setRightSpeed(0);
