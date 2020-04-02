@@ -6,7 +6,7 @@ This repository contains my own efforts to solve a series of tasks towards a maz
 
 **Tasks:**
 
-1. Get the robot to move forward for 4ft. :heavy_check_mark: [Solution]()
+1. Get the robot to move forward for 4ft. :heavy_check_mark: [Solution](https://github.com/jodeleeuw/robot_competition_2020/tree/master/Milestone%201)
 2. Follow a line for 4ft.
 3. Follow a 2x2 square for at least a full lap.
 4. Follow a maze-like pattern with no intersections.
