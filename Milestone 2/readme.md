@@ -67,11 +67,70 @@ requires that you have an `unsigned int array` to store the line sensor data. In
 using the ZumoBuzzer to play a tone that gets higher when the line is to the right. This is a nice method
 for checking that it is working with using the `Serial` port (and thus tethering the robot to your computer).
 
+*Imporant: You must connect the jumper for the buzzer before it will play sound. See this video for instructions.*
+
 ```c++
 ZumoBuzzer buzzer; // create a buzzer to play sound
-unsigned int sensor_vals[6]; // initialize an array for the 6 values from the sensor
-void loop(){
-  int line_position = readLine(sensor_vals);
-  
+unsigned int sensor_vals[6];
+void loop() {
+  int line_position = linesensors.readLine(sensor_vals);
+  int frequency = 220 + ((float)line_position / 5000) * 660;
+  buzzer.playFrequency(frequency, 100, 15);
+  while (buzzer.isPlaying());
 }
 ```
+
+The full code for this method is available in the `read_line_method` folder.
+
+#### Option 2: Raw Data
+
+You can also read the raw values for each sensor using the `read()` method. This method does not require any
+calibration.
+
+There's not an interesting way that I could think of to provide access to the values, so I use the normal
+`Serial` port method for communicating with the Arduino.
+
+```c++
+#include <Wire.h>
+#include <ZumoShield.h>
+
+ZumoReflectanceSensorArray linesensors(QTR_NO_EMITTER_PIN);
+
+void setup() {
+  Serial.begin(9600);
+}
+
+unsigned int sensor_vals[6];
+void loop() {
+  linesensors.read(sensor_vals);
+  Serial.print(sensor_vals[0]);
+  Serial.print(" ");
+  Serial.print(sensor_vals[1]);
+  Serial.print(" ");
+  Serial.print(sensor_vals[2]);
+  Serial.print(" ");
+  Serial.print(sensor_vals[3]);
+  Serial.print(" ");
+  Serial.print(sensor_vals[4]);
+  Serial.print(" ");
+  Serial.println(sensor_vals[5]);
+  delay(50);
+}
+```
+
+Notice that calling `read()` does not return any new values. Instead it updates the values of the `sensor_vals`
+array. 
+
+If you upload this code and open your serial monitor (making sure to set the Baud rate to 9600 in the bottom
+corner of the serial monitor) you should see lines of numbers with 6 items per line. The values should range 
+from 0 to 2000, with 2000 being when the sensor is directly over the line.
+
+You could save yourself many lines of code in the `loop()` by using the `sprintf()` function. If you want
+to adapt the code you can Google `sprintf` to learn how to use it.
+
+This code is also available in the `raw_data_method` folder.
+
+
+
+
+
