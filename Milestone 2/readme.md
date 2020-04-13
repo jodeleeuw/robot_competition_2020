@@ -69,7 +69,7 @@ requires that you have an `unsigned int array` to store the line sensor data. In
 using the ZumoBuzzer to play a tone that gets higher when the line is to the right. This is a nice method
 for checking that it is working with using the `Serial` port (and thus tethering the robot to your computer).
 
-*Imporant: You must connect the jumper for the buzzer before it will play sound. See this video for instructions.*
+*Imporant: You must connect the jumper for the buzzer before it will play sound. See [this video](https://www.youtube.com/watch?v=SL-j1g6T6WY) for instructions.*
 
 ```c++
 ZumoBuzzer buzzer; // create a buzzer to play sound
