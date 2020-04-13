@@ -4,6 +4,8 @@
 
 The Zumo shield has an array of six short-range IR reflectance sensors under the front of the robot. 
 
+![](img/line_sensors.jpg)
+
 ### Initializing the Sensor Array
 
 If you have installed the ZumoShield library (see video from first milestone) then you can go to `Sketch > Include Library`
