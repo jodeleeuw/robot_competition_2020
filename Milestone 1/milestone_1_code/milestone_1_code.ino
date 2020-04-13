@@ -9,13 +9,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  motors.setLeftSpeed(300);
-  motors.setRightSpeed(300);
+  motors.setSpeeds(300,300);
   delay(4000);
-  motors.setLeftSpeed(0);
-  motors.setRightSpeed(0);
+  motors.setSpeeds(0,0);
   while(true){
-    
+    // do nothing
   }
 
 }
