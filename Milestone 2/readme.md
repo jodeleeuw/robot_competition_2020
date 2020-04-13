@@ -189,7 +189,82 @@ See the `bang_bang_control` folder for this code.
 
 ### Proportional control
 
-As described in the 
+As described in the [video on PID control](https://www.youtube.com/watch?v=4Y7zG48uHRo), one solution
+to improve the smoothness of the line tracking is to use the *amount* of error to adjust the *amount* of
+correction. The larger the error, the more correction we apply. This is called **proportion-based** control.
+
+Here's an example of applying proportion-based control.
+
+```c++
+unsigned int sensor_vals[6];
+int BASE_SPEED = 200;
+double PROPORTION_GAIN = 0.2;
+void loop() {
+  int line_position = linesensors.readLine(sensor_vals);
+  int error = line_position - 2500;
+  int left_speed = BASE_SPEED + PROPORTION_GAIN * error;
+  int right_speed = BASE_SPEED + -PROPORTION_GAIN * error;
+  motors.setSpeeds(left_speed, right_speed);
+}
+```
+
+The `PROPORTION_GAIN` variable scales how much the error signal changes the motor signal. For example,
+if the line sensor reads `3000`, the value for `left_speed` will be `300` and the value for `right_speed`
+will be `100`. Note that the sign on `PROPORTION_GAIN` is negative for the right motor.
+
+Setting the right value for `PROPORTION_GAIN` is crucial for success.
+
+Here's what the robot looks like with a value of `1.0`
+
+
+Here's what the robot looks like with a value of `0.2`
+
+
+Here's what the robot looks like with a value of `0.02`
+
+### PD control
+
+Taking into account the *rate* at which the error is changing can allow for smoother control. When
+the error is changing quickly, we slow down the amount of adjustment. This lets the system smoothly
+stabilize. Adding this *derivative* term into the controller produces a **PD (proportion + derivative)** 
+controller.
+
+Here's an example of adding the derivative term to the proportion-based controller above.
+
+```c++
+unsigned int sensor_vals[6];
+int BASE_SPEED = 200;
+double PROPORTION_GAIN = 0.2;
+double DERIVATIVE_GAIN = 3;
+int last_error = 0;
+void loop() {
+  int line_position = linesensors.readLine(sensor_vals);
+  int error = line_position - 2500;
+  int error_change = error - last_error;
+  int left_speed = BASE_SPEED + PROPORTION_GAIN * error + DERIVATIVE_GAIN * error_change;
+  int right_speed = BASE_SPEED + -PROPORTION_GAIN * error + -DERIVATIVE_GAIN * error_change;
+  last_error = error;
+  motors.setSpeeds(left_speed, right_speed);
+}
+```
+Like the proportion-based term, there is a `DERIVATIVE_GAIN` parameter that we can tune to improve
+the performance of the robot. However, the proportion-based controller by itself was already pretty
+good with a reasonable parameter, so setting `DERIVATIVE_GAIN` to be very small just makes the robot
+behave like it is proportion-only. 
+
+With a value of `3.0` the robot's performance is very smooth.
+
+When the value of `DERIVATIVE_GAIN` is too high, you get very tight line following but the robot oscillates
+quickly over the line. Here it is set to `30`. Notice that the robot is travelling slower here
+than in the above clip, because of the oscillations.
+
+### PID Control
+
+The final option would be to add a term that is responsive to the sum of errors, the *integral* term. 
+However, PD-control alone is more than sufficient for this task, in part because the robot is 
+so responsive and errors can be corrected very quickly. So we don't need to implement the I-portion of
+the PID controller.
+
 
 
 

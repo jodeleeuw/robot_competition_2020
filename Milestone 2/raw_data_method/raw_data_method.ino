@@ -1,9 +1,7 @@
 #include <Wire.h>
 #include <ZumoShield.h>
 
-ZumoMotors motors;
 ZumoReflectanceSensorArray linesensors(QTR_NO_EMITTER_PIN);
-ZumoBuzzer buzzer;
 
 void setup() {
   Serial.begin(9600);
