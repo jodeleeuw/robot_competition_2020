@@ -216,15 +216,15 @@ Setting the right value for `PROPORTION_GAIN` is crucial for success.
 
 Here's what the robot looks like with a value of `1.0`
 
-![](img/pc_high.gif)
+![](img/pc_gain_high.gif)
 
 Here's what the robot looks like with a value of `0.2`
 
-![](img/pc_tuned.gif)
+![](img/pc_gain_tuned.gif)
 
 Here's what the robot looks like with a value of `0.02`
 
-![](img/pc_low.gif)
+![](img/pc_gain_low.gif)
 
 ### PD control
 
