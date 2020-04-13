@@ -132,6 +132,61 @@ to adapt the code you can Google `sprintf` to learn how to use it.
 
 This code is also available in the `raw_data_method` folder.
 
+## Tutorial: PID control
+
+Once you have the ability to get the position of the line you are ready to create a line-following robot.
+
+[This 5 minute video](https://www.youtube.com/watch?v=4Y7zG48uHRo) does an excellent job of explaining 
+the basics of **PID Control**, which provides a solid foundation for building the line-following mechanism. 
+I recommend watching it and then coming back to the turorial.
+
+For all of these methods we need a way of measuring the *error* in the position of the robot relative
+to the line. We can use the `readLine()` method described above to get the error. If the robot is pefectly
+centered over the line the `readLine()` method should return `2500`. Therefore:
+
+```c++
+in
+```
+
+### Bang-bang control
+
+Let's start with the simplest case in the video: *bang-bang* control. For bang-bang control, we have a fixed
+speed that we adjust the robot by when it is not centered over the line. 
+
+Here's what a the `loop()` might look like:
+
+```c++
+void loop() {
+  int line_position = linesensors.readLine(sensor_vals);
+  int error = line_position - 2500;
+  if(error > 250){
+    motors.setSpeeds(200,100);
+  } else if(error < -250){
+    motors.setSpeeds(100,200);
+  } else {
+    motors.setSpeeds(150,150);
+  }
+}
+```
+
+If the error is positive (and above some minimum error threshold) the robot will drift to the right. If
+the error is negative the robot will drift to the left. If the error is within some tolerance the robot
+moves straight.
+
+The result is an OK line-follower, but it has a hard time correcting for curves:
+
+![](img/bb_lf.gif)
+
+You could try tuning parameters here like the motor speeds and the tolerance for error. Setting the error
+tolerance lower should make for better line following, but the behavior of the robot will become very
+jerky.
+
+See the `bang_bang_control` folder for this code.
+
+### Proportional control
+
+As described in the 
+
 
 
 
