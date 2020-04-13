@@ -142,11 +142,15 @@ I recommend watching it and then coming back to the turorial.
 
 For all of these methods we need a way of measuring the *error* in the position of the robot relative
 to the line. We can use the `readLine()` method described above to get the error. If the robot is pefectly
-centered over the line the `readLine()` method should return `2500`. Therefore:
+centered over the line the `readLine()` method should return `2500`. Therefore...
 
 ```c++
-in
+int line_position = linesensors.readLine(sensor_vals);
+int error = line_position - 2500;
 ```
+
+... works as a measurement of *error*. Positive errors indicate that the robot is too far to the left of the line.
+Negative errors indicate the robot is too far to the right of the line.
 
 ### Bang-bang control
 
