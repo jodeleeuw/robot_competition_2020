@@ -216,11 +216,15 @@ Setting the right value for `PROPORTION_GAIN` is crucial for success.
 
 Here's what the robot looks like with a value of `1.0`
 
+![](img/pc_high.gif)
 
 Here's what the robot looks like with a value of `0.2`
 
+![](img/pc_tuned.gif)
 
 Here's what the robot looks like with a value of `0.02`
+
+![](img/pc_low.gif)
 
 ### PD control
 
@@ -254,9 +258,13 @@ behave like it is proportion-only.
 
 With a value of `3.0` the robot's performance is very smooth.
 
+![](img/pd_tuned.gif)
+
 When the value of `DERIVATIVE_GAIN` is too high, you get very tight line following but the robot oscillates
 quickly over the line. Here it is set to `30`. Notice that the robot is travelling slower here
 than in the above clip, because of the oscillations.
+
+![](img/pd_high.gif)
 
 ### PID Control
 
