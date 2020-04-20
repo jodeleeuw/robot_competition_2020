@@ -90,7 +90,8 @@ void solved(){
 }
 ```
 
-Here's a video of the robot solving a maze and playing the tune.
+Here's a video of the robot solving a maze and playing the tune. Note the L H H L L pattern of pitches at the end corresponds
+to the turns being L R R L L.
 
 [![YouTube Video](https://img.youtube.com/vi/Q6VOK72gTTk/0.jpg)](https://youtu.be/Q6VOK72gTTk)
 
