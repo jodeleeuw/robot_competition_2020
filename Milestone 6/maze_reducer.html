@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <input id="path" type="text"></input>
+    <button id="go">Reduce</button>
+    <p>Simplified Path<span id="result"></span></p>
+  </body>
+  <script>
+
+    // the actual path of the robot should be:
+    // LSLLULUSLRLLLUSRSRRLSLRULLULULLLR
+    
+    var path;
+    var turn_counter;
+
+    document.querySelector('#go').addEventListener('click', function(){
+      path = document.querySelector('#path').value.split('');
+      turn_counter = path.length;
+      while(!reduce_path()){}
+      document.querySelector('#result').innerHTML = JSON.stringify(path);
+    });
+
+    function reduce_path(){
+      var flag = false;  
+      for(path_location=2; path_location < turn_counter; path_location++){
+        if(flag){
+          path[path_location-2] = path[path_location];
+        } else if(path[path_location-1] == 'U'){
+          var a = path[path_location - 2];
+          var b = path[path_location];
+          var c = '';
+          var total_angle = 180;
+          if(a == 'L'){
+            total_angle += 270;
+          }
+          if(a == 'U'){
+            total_angle += 180;
+          }
+          if(a == 'R'){
+            total_angle += 90;
+          }
+          if(b == 'L'){
+            total_angle += 270;
+          }
+          if(b == 'U'){
+            total_angle += 180;
+          }
+          if(b == 'R'){
+            total_angle += 90;
+          }
+          total_angle = total_angle % 360;
+          if(total_angle == 0){
+            c = 'S';
+          }
+          if(total_angle == 90){
+            c = 'R';
+          }
+          if(total_angle == 180){
+            c = 'U';
+          }
+          if(total_angle == 270){
+            c = 'L';
+          }
+          path[path_location - 2] = c;
+          flag=true;
+        }
+      }
+      if(flag){
+        turn_counter = turn_counter - 2;
+        path[turn_counter] = null;
+        path[turn_counter + 1] = null;
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+</html>
