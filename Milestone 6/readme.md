@@ -76,8 +76,7 @@ Following the known path does allow for some optimization if you want to do it. 
 
 ## Solved!
 
-
-
+[![YouTube Video](https://img.youtube.com/vi/FfUvKNzYfrI/0.jpg)](https://youtu.be/FfUvKNzYfrI)
 
 
 

@@ -9,14 +9,14 @@ Pushbutton button(ZUMO_BUTTON);
 void setup() {
   int i;
   int spin_direction = 1;
-  motors.setSpeeds(80*spin_direction, -80*spin_direction);
-  for(i = 0; i<100; i++){
+  motors.setSpeeds(120*spin_direction, -120*spin_direction);
+  for(i = 0; i<80; i++){
     linesensors.calibrate();
-    if(i%50 == 25){ // every 50 loops, starting on loop 25...
+    if(i%40 == 20){ // every 50 loops, starting on loop 25...
       spin_direction = -spin_direction;
-      motors.setSpeeds(80*spin_direction, -80*spin_direction);
+      motors.setSpeeds(120*spin_direction, -120*spin_direction);
     }
-    delay(20);
+    delay(10);
   }
   motors.setSpeeds(0,0);
   delay(500);
